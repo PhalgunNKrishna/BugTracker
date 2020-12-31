@@ -1,7 +1,9 @@
 package com.bugtracker.bug.controller;
 
 import com.bugtracker.bug.*;
+import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
+import org.keycloak.adapters.RefreshableKeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +39,13 @@ public class UserController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<Ticket> create(@Valid @RequestBody Ticket ticket, HttpServletRequest request) {
-
+        System.out.println("create");
         // Variables that show whether current user and user's group are in repository
         KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
         String curr_user_id = principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject();
+        System.out.println(curr_user_id);
         Optional<T_User> existUser = userRepository.findById(curr_user_id);
-        System.out.println("user is " + existUser);
+        //System.out.println("user is " + existUser);
 
         KeycloakSecurityContext keycloakSecurityContext = (KeycloakSecurityContext)(request.getAttribute(KeycloakSecurityContext.class.getName()));
         AccessToken token = keycloakSecurityContext.getToken();
@@ -82,9 +85,18 @@ public class UserController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<T_User> getAllTickets(HttpServletRequest request) {
-
-        KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
-        String curr_user_id = principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject();
+        System.out.println("got to all");
+//        KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
+//        String curr_user_id = principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject();
+//        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
+//        KeycloakPrincipal principal = (KeycloakPrincipal)token.getPrincipal();
+//        KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
+//        AccessToken accessToken = session.getToken();
+//        String curr_user_id = accessToken.getPreferredUsername();
+        RefreshableKeycloakSecurityContext context = (RefreshableKeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+        AccessToken accessToken = context.getToken();
+        String curr_user_id = (accessToken.getOtherClaims().get("user_id").toString());
+        System.out.println("curr user id = " + curr_user_id);
         Optional<T_User> optionalUser = userRepository.findById(curr_user_id);
 
         if (!optionalUser.isPresent()) {
@@ -96,6 +108,7 @@ public class UserController {
 
     @GetMapping("index")
     public String index(){
+        System.out.println("hi");
         return "user/index";
     }
 }
