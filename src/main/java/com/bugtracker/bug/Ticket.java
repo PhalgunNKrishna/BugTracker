@@ -18,15 +18,15 @@ public class Ticket {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private T_User t_user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "group_id")
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private T_Group t_group;
 
-    private Date t_date;
+    //private Date t_date;
     private String body;
     protected Boolean resolved;
 
@@ -35,7 +35,7 @@ public class Ticket {
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public void setId(int id) {
@@ -43,7 +43,7 @@ public class Ticket {
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setUser(T_User t_user) {
@@ -51,7 +51,7 @@ public class Ticket {
     }
 
     public T_User getUser() {
-        return this.t_user;
+        return t_user;
     }
 
     public void setGroup(T_Group t_group) {
@@ -59,23 +59,23 @@ public class Ticket {
     }
 
     public T_Group getGroup() {
-        return this.t_group;
+        return t_group;
     }
 
-    public void setDate() {
-        this.t_date = new Date();
-    }
-
-    public Date getDate() {
-        return this.t_date;
-    }
-
+//    public void setDate() {
+//        this.t_date = new Date();
+//    }
+//
+//    public Date getDate() {
+//        return this.t_date;
+//    }
+//
     public void setBody(String body) {
         this.body = body;
     }
 
     public String getBody() {
-        return this.body;
+        return body;
     }
 
     public void setResolved(boolean resolved) {
@@ -83,6 +83,6 @@ public class Ticket {
     }
 
     public boolean getResolved() {
-        return this.resolved;
+        return resolved;
     }
 }

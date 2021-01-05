@@ -5,8 +5,6 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.keycloak.representations.AccessToken;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.CascadeType;
@@ -30,22 +28,16 @@ public class T_User {
     private Set<Ticket> tickets = new HashSet<>();
 
     public String getUser_id() {
-        return this.user_id;
+        return user_id;
     }
 
     @GetMapping
-    public ResponseEntity setUser_id(HttpServletRequest request) {
-
-        // Below code taken from:
-        // https://stackoverflow.com/questions/45802797/spring-keycloak-get-user-id/52700002
-
-        KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
-        this.user_id = principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject();
-        return new ResponseEntity(HttpStatus.OK);
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(HttpServletRequest request) {

@@ -29,17 +29,13 @@ public class T_Group {
     }
 
     @GetMapping
-    public ResponseEntity setGroup(HttpServletRequest request) {
-        KeycloakSecurityContext keycloakSecurityContext = (KeycloakSecurityContext)(request.getAttribute(KeycloakSecurityContext.class.getName()));
-        AccessToken token = keycloakSecurityContext.getToken();
+    public void setGroup(String t_group) {
 
         // Below code ("other claims") taken from:
         // https://stackoverflow.com/questions/45802797/spring-keycloak-get-user-id/52700002
         // https://stackoverflow.com/questions/32678883/keycloak-retrieve-custom-attributes-to-keycloakprincipal
 
-        Map<String, Object> other_claims = token.getOtherClaims();
-        this.t_group = String.valueOf(other_claims.get("group"));
-        return new ResponseEntity(HttpStatus.OK);
+        this.t_group = t_group;
     }
 
     public Set<Ticket> getTickets() {
