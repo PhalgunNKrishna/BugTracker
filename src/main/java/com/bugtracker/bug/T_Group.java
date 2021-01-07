@@ -29,13 +29,13 @@ public class T_Group {
     }
 
     @GetMapping
-    public void setGroup(String group_id) {
+    public void setGroup(String t_group) {
 
         // Below code ("other claims") taken from:
         // https://stackoverflow.com/questions/45802797/spring-keycloak-get-user-id/52700002
         // https://stackoverflow.com/questions/32678883/keycloak-retrieve-custom-attributes-to-keycloakprincipal
 
-        this.group_id = group_id;
+        this.group_id = t_group;
     }
 
     public Set<Ticket> getTickets() {

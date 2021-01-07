@@ -1,5 +1,6 @@
 package com.bugtracker.bug;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
@@ -50,16 +51,26 @@ public class Ticket {
         this.t_user = t_user;
     }
 
+    @JsonIgnore
     public T_User getUser() {
         return t_user;
+    }
+
+    public String getUserId() {
+        return t_user.getUser_id();
     }
 
     public void setGroup(T_Group t_group) {
         this.t_group = t_group;
     }
 
+    @JsonIgnore
     public T_Group getGroup() {
         return t_group;
+    }
+
+    public String getGroupId() {
+        return t_group.getGroup();
     }
 
     public void setDate(Date date) {

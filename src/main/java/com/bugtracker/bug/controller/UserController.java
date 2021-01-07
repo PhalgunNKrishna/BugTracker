@@ -56,7 +56,7 @@ public class UserController {
 
         String curr_group_id = (accessToken.getOtherClaims().get("groups").toString());
         System.out.println("group_id = " + curr_group_id);
-        Optional<T_Group> existGroup = groupRepository.findById(curr_group_id);
+        Optional<T_Group> optionalGroup = groupRepository.findById(curr_group_id);
 
         // if user in user repo, set user to that user in repo
         // if user not in user repo, add user to user repo and set user to that user in repo
@@ -70,13 +70,13 @@ public class UserController {
             userRepository.save(t_user);
             System.out.println("70");
             Optional<T_User> new_user = userRepository.findById(curr_user_id);
-            ticket.setUser(new_user.get());
+            ticket.setUser(t_user);
             System.out.println("this ticket's user = " + ticket.getUser());
         }
 
         // same as above but with group, not user
-        if (existGroup.isPresent()) {
-            ticket.setGroup(existGroup.get());
+        if (optionalGroup.isPresent()) {
+            ticket.setGroup(optionalGroup.get());
         } else {
             T_Group t_group = new T_Group();
             t_group.setGroup(curr_group_id);
@@ -85,7 +85,7 @@ public class UserController {
             // delete group_id column or make the group_id column an @Id generated value
             groupRepository.save(t_group);
             Optional<T_Group> new_group = groupRepository.findById(curr_group_id);
-            ticket.setGroup(new_group.get());
+            ticket.setGroup(t_group);
             System.out.println("this ticket's group = " + ticket.getGroup());
         }
 
