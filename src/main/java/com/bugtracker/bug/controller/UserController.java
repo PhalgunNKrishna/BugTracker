@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -88,8 +89,14 @@ public class UserController {
             System.out.println("this ticket's group = " + ticket.getGroup());
         }
 
+        // Setting Date
+        Date t_date = new Date();
+        ticket.setDate(t_date);
+
         // save ticket into ticket repo
+        System.out.println("before saving");
         Ticket savedTicket = ticketRepository.save(ticket);
+        System.out.println("after saving");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(savedTicket.getId()).toUri();

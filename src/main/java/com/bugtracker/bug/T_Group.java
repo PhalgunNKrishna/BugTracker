@@ -19,23 +19,23 @@ import java.util.Set;
 public class T_Group {
 
     @Id
-    private String t_group;
+    private String group_id;
 
     @OneToMany(mappedBy = "t_group", cascade = CascadeType.ALL)
     private Set<Ticket> tickets = new HashSet<>();
 
     public String getGroup() {
-        return this.t_group;
+        return this.group_id;
     }
 
     @GetMapping
-    public void setGroup(String t_group) {
+    public void setGroup(String group_id) {
 
         // Below code ("other claims") taken from:
         // https://stackoverflow.com/questions/45802797/spring-keycloak-get-user-id/52700002
         // https://stackoverflow.com/questions/32678883/keycloak-retrieve-custom-attributes-to-keycloakprincipal
 
-        this.t_group = t_group;
+        this.group_id = group_id;
     }
 
     public Set<Ticket> getTickets() {

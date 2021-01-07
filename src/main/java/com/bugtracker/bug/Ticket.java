@@ -13,8 +13,8 @@ public class Ticket {
     private String title;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int ticket_id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
@@ -26,7 +26,7 @@ public class Ticket {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private T_Group t_group;
 
-    //private Date t_date;
+    private Date t_date;
     private String body;
     protected Boolean resolved;
 
@@ -39,11 +39,11 @@ public class Ticket {
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.ticket_id = id;
     }
 
     public int getId() {
-        return id;
+        return ticket_id;
     }
 
     public void setUser(T_User t_user) {
@@ -62,14 +62,14 @@ public class Ticket {
         return t_group;
     }
 
-//    public void setDate() {
-//        this.t_date = new Date();
-//    }
-//
-//    public Date getDate() {
-//        return this.t_date;
-//    }
-//
+    public void setDate(Date date) {
+        this.t_date = date;
+    }
+
+    public Date getDate() {
+        return t_date;
+    }
+
     public void setBody(String body) {
         this.body = body;
     }
