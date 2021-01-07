@@ -75,6 +75,7 @@ public class UserController {
         }
 
         // same as above but with group, not user
+        // normal commit
         if (optionalGroup.isPresent()) {
             ticket.setGroup(optionalGroup.get());
         } else {
