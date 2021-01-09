@@ -46,11 +46,10 @@ public class AdminController {
     @PatchMapping(value = "/resolve/{id}")
     public ResponseEntity<Void> resolve(@PathVariable String id,
                                         @RequestBody String admin_message) {
-        System.out.println("49");
+
         String new_id = id.replace("{", "");
         String id_new = new_id.replace("}", "");
         Optional<Ticket> optionalTicket = ticketRepository.findById(Integer.parseInt(id_new));
-        System.out.println("51");
 
         if (!optionalTicket.isPresent()) {
             return ResponseEntity.notFound().build();
