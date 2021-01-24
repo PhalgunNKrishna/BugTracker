@@ -1,0 +1,34 @@
+(function () {
+    'use strict';
+
+     angular
+        .module('app')
+        .controller('UserController', UserController);
+
+     UserController.$inject = ['$http'];
+
+     function UserController($http) {
+        var vm = this;
+
+        vm.tickets = [];
+        vm.getAllTickets = getAllTickets;
+
+        init();
+
+        function init() {
+            getAllTickets();
+        }
+
+        function getAllTickets() {
+            var url = "/user/all";
+            var ticketsPromise = $http.get(url);
+            ticketsPromise.then(function(response) {
+                vm.tickets = response.data;
+                console.log("yes")
+            })
+            //.catch(function(err){console.log("nope")});
+            .catch(function(err){console.log("no")});
+        }
+     }
+})();
+

@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments.html :: headerfiles"></head>
+<head th:insert="fragments.html :: headerfiles">
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="/static/app/users.controller.js" th:src="@{/app/users.controller.js}"></script>
+</head>
+    <base href>
 <header th:insert="fragments.html :: nav"></header>
 <!-- Page content goes here -->
 <div class="container">
-    <p>This is User\Index. Only people with role_user can see this.</p>
+    <p>This is your "User Portal," accessible to all standard users. <br>
+    Standard users like yourself can submit bugs you find in the administrators' applications to the administrators
+    themselves.</p>
+    <div class="row">
+        <div class="col-sm-4" style="background-color:lavender;">
+            <div ng-app="User" ng-controller="UsersController">
+                <table border = "2">
+
+                    <th align="center">Ticket ID</th>
+                    <th align="center">Ticket Title</th>
+                    <th align="center">Ticket Body</th>
+                    <th align="center">Resolved?</th>
+
+                    <tr ng-repeat="t in tickets">
+                    <td align="center">{{t.id}}</td>
+                    <td align="center">{{t.title}}</td>
+                    <td align="center">{{t.body}}</td>
+                    <td align="center">{{t.resolved}}</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
