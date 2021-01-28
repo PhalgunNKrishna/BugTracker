@@ -105,6 +105,12 @@ public class UserController {
         return ResponseEntity.ok(optionalUser.get());
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Ticket> getTicket(HttpServletRequest request, @PathVariable int id) {
+        Optional<Ticket> optionalTicket = ticketRepository.findById(id);
+        return ResponseEntity.ok(optionalTicket.get());
+    }
+
     @GetMapping("index")
     public String index(){
         return "user/index";

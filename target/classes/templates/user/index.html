@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments.html :: headerfiles">
+<style>
+    .imageContainer {
+       width:600px;
+       height:600px;
+       position: absolute;
+       top: 50px
+       right: 50px
+    }
+</style>
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="text/javascript" src="/static/app/users.controller.js" th:src="@{/app/users.controller.js}"></script>
@@ -9,29 +18,58 @@
 <header th:insert="fragments.html :: nav"></header>
 <!-- Page content goes here -->
 <div class="container">
-    <p>This is your "User Portal," accessible to all standard users. <br>
-    Standard users like yourself can submit bugs you find in the administrators' applications to the administrators
-    themselves.</p>
-    <div class="row">
-        <div class="col-sm-4" style="background-color:lavender;">
-            <div ng-app="User" ng-controller="UsersController">
-                <table border = "2">
+    <div ng-app="User" ng-controller="UsersController">
 
-                    <th align="center">Ticket ID</th>
-                    <th align="center">Ticket Title</th>
-                    <th align="center">Ticket Body</th>
-                    <th align="center">Resolved?</th>
+        <p>This is your "User Portal," accessible to all standard users. <br>
+            Standard users like yourself can submit bugs you find in the <br>
+            administrators' applications to the administrators themselves.</p>
 
-                    <tr ng-repeat="t in tickets">
-                    <td align="center">{{t.id}}</td>
-                    <td align="center">{{t.title}}</td>
-                    <td align="center">{{t.body}}</td>
-                    <td align="center">{{t.resolved}}</td>
-                    </tr>
-
-                </table>
+        <!-- Table of User Tickets -->
+       <!-- <div ng-model="tid" ng-change="view(tid)"> -->
+            <div class="row">
+                <div class="col-sm-4" style="background-color:lavender;">
+                    <table border = "2">
+                        <th align="center">Ticket ID</th>
+                        <th align="center">Ticket Title</th>
+                        <th align="center">Ticket Body</th>
+                        <th align="center">Resolved?</th>
+                        <th align="center">View Ticket</th>
+                        <tr ng-repeat="t in tickets">
+                            <td align="center">{{t.id}}</td>
+                            <td align="center">{{t.title}}</td>
+                            <td align="center">{{t.body}}</td>
+                            <td align="center">{{t.resolved}}</td>
+                            <td>
+                                <input type="button" name="View" value="View Ticket" ng-click="view(t.id)"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
+        <!-- </div> -->
+
+        <!-- NotePad Image placed to the right of the table -->
+        <!-- Image taken from: https://www.megapixl.com/sticky-blank-note-illustration-2223908 -->
+        <div style="position:absolute; top:50px; right:30px">
+            <img src="../../images/BetterNote.jpg" alt="NotePad" width="600px" height="600px"/>
+            <!--
+            <div class="text-block">
+                {{p}}
+            </div>
+            -->
         </div>
+
+        <div style="position:absolute; top:145px; right:50px">
+            <p>
+                Title: {{p.title}}<br>
+                Body: {{p.body}}<br>
+                Resolved: {{p.resolved}}<br>
+                Admin Message (If Empty, no admin have left messages): {{p.admin_message}}<br>
+                Group Name: {{p.groupId}}<br>
+            </p>
+        </div>
+
+
     </div>
 </div>
 </body>
