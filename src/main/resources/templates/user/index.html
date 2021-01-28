@@ -27,7 +27,7 @@
         <!-- Table of User Tickets -->
        <!-- <div ng-model="tid" ng-change="view(tid)"> -->
             <div class="row">
-                <div class="col-sm-4" style="background-color:lavender;">
+                <div class="col-sm-4" style="background-color:#FAEBD7;">
                     <table border = "2">
                         <th align="center">Ticket ID</th>
                         <th align="center">Ticket Title</th>
@@ -40,7 +40,7 @@
                             <td align="center">{{t.body}}</td>
                             <td align="center">{{t.resolved}}</td>
                             <td>
-                                <input type="button" name="View" value="View Ticket" ng-click="view(t.id)"/>
+                                <input type="button" style="background-color:#40E0D0" name="View" value="View Ticket" ng-click="view(t.id)"/>
                             </td>
                         </tr>
                     </table>
@@ -59,13 +59,13 @@
             -->
         </div>
 
-        <div style="position:absolute; top:145px; right:50px">
+        <div style="position:absolute; top:145px; right:100px">
             <p>
-                Title: {{p.title}}<br>
-                Body: {{p.body}}<br>
-                Resolved: {{p.resolved}}<br>
-                Admin Message (If Empty, no admin have left messages): <br> {{p.admin_message}}<br>
-                Group Name: {{p.groupId}}<br>
+            <div style="color: #000099"> Title: </div> {{p.title}}<br><br>
+            <div style="color: #000099"> Body: </div> {{p.body}}<br><br>
+            <div style="color: #000099"> Resolved?: </div> {{p.resolved}}<br><br>
+            <div style="color: #000099"> Admin Message (If Empty, no admin have left messages): </div> {{ad_mess}}<br><br>
+            <div style="color: #000099"> Group Name: </div> {{p.groupId}}
             </p>
         </div>
 
